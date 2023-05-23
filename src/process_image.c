@@ -21,7 +21,17 @@ void set_pixel(image im, int x, int y, int c, float v)
 image copy_image(image im)
 {
     image copy = make_image(im.w, im.h, im.c);
-    // TODO Fill this in
+    for(int i=0;i<im.w;i++){
+        for(int j=0;j<im.h;j++){
+            for(int k=0;k<3;k++){
+            int pvalue=
+            
+            
+            
+            
+            }
+        }
+    }            
     return copy;
 }
 

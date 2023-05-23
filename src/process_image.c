@@ -10,7 +10,7 @@ float get_pixel(image im, int x, int y, int c)
     if (x >= im.w) x = im.w - 1;
     if (y < 0) y = 0;
     if (y >= im.h) y = im.h - 1;
-    return im.data[x + im.w * y + im.w * im.h * c)];
+    return im.data[x + im.w * y + im.w * im.h * c];
 }
 
 void set_pixel(image im, int x, int y, int c, float v)
@@ -21,33 +21,16 @@ void set_pixel(image im, int x, int y, int c, float v)
 image copy_image(image im)
 {
     image copy = make_image(im.w, im.h, im.c);
-    if(im.c=0)
-        for(int i=0;i<im.w;i++){
-            for(int j=0;j<im.h;j++0{
-                int pvalue=x + im.w * y + im.w * im.h * c;
-            }
-        }
-    if(im.c=1)
-        for(int i=0;i<im.w;i++){
-            for(int j=0;j<im.h;j++0{
-                int pvalue=x + im.w * y + im.w * im.h * c; 
-            }
-        }
-     if(im.c=2)
-        for(int i=0;i<im.w;i++){
-            for(int j=0;j<im.h;j++0{
-                int pvalue=x + im.w * y + im.w * im.h * c;
-            }
-        }           
-    
-    return copy;
+    memcpy(copy.data, im.data, im.w * im.h * im.c * sizeof(float)); 
+   return copy;
 }
 
 image rgb_to_grayscale(image im)
 {
     assert(im.c == 3);
     image gray = make_image(im.w, im.h, 1);
-    // TODO Fill this in
+    
+    
     return gray;
 }
 

@@ -6,13 +6,16 @@
 
 float get_pixel(image im, int x, int y, int c)
 {
-    // TODO Fill this in
-    return 0;
+    if (x < 0) x = 0;
+    if (x >= im.w) x = im.w - 1;
+    if (y < 0) y = 0;
+    if (y >= im.h) y = im.h - 1;
+    return im.data[x + im.w * y + im.w * im.h * c)];
 }
 
 void set_pixel(image im, int x, int y, int c, float v)
 {
-    // TODO Fill this in
+    im.data[x + im.w * y + im.w * im.h * c)] = v;
 }
 
 image copy_image(image im)

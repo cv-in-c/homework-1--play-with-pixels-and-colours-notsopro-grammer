@@ -15,23 +15,31 @@ float get_pixel(image im, int x, int y, int c)
 
 void set_pixel(image im, int x, int y, int c, float v)
 {
-    im.data[x + im.w * y + im.w * im.h * c)] = v;
+    im.data[x + im.w * y + im.w * im.h * c] = v;
 }
 
 image copy_image(image im)
 {
     image copy = make_image(im.w, im.h, im.c);
-    for(int i=0;i<im.w;i++){
-        for(int j=0;j<im.h;j++){
-            for(int k=0;k<3;k++){
-            int pvalue=
-            
-            
-            
-            
+    if(im.c=0)
+        for(int i=0;i<im.w;i++){
+            for(int j=0;j<im.h;j++0{
+                int pvalue=x + im.w * y + im.w * im.h * c;
             }
         }
-    }            
+    if(im.c=1)
+        for(int i=0;i<im.w;i++){
+            for(int j=0;j<im.h;j++0{
+                int pvalue=x + im.w * y + im.w * im.h * c; 
+            }
+        }
+     if(im.c=2)
+        for(int i=0;i<im.w;i++){
+            for(int j=0;j<im.h;j++0{
+                int pvalue=x + im.w * y + im.w * im.h * c;
+            }
+        }           
+    
     return copy;
 }
 

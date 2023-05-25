@@ -22,6 +22,19 @@ image copy_image(image im)
 {
     image copy = make_image(im.w, im.h, im.c);
     memcpy(copy.data, im.data, im.w * im.h * im.c * sizeof(float)); 
+    //by loops(not sure tho)
+    /*
+    for(int i=0;i<im.c;i++){
+    for(int j=0;j<im.h;j++){
+    for(int k=0;k<im.w;k++){
+    int pval=im.data[k+j*im.w+i*im.h*im.w];
+    copy.data[k+j*im.w+i*im.h*im.w]=pval;
+    return copy;
+    }
+    }
+    }
+
+    */
    return copy;
 }
 
@@ -81,10 +94,10 @@ void rgb_to_hsv(image im)
    for(int i=0;<im.h;i++){
        for(int j=0;j<im.w;j++){
            float r=im.data[j+im.w*i];
-           float g=im.data[j+im.w*i+im.w*im.h*c];
-           float b=im.data[j+im.w*i+2*im.w*im.h*c];
-           float V=float three_way_max(r,g,b);
-           float m=float three_way_min(r,g,b);
+           float g=im.data[j+im.w*i+im.w*im.h];
+           float b=im.data[j+im.w*i+2*im.w*im.h];
+           float V=three_way_max(r,g,b);
+           float m=three_way_min(r,g,b);
            float C=V-m;
            float S;
             if(V==0)
@@ -129,10 +142,10 @@ void hsv_to_rgb(image im)
            k1=((int)(5+6*H))%6 + ((5+6*H)-(int)(5+6*H));      //here we first calculated integral part then added fractional part
            k2=((int)(3+6*H))%6 + ((3+6*H)-(int)(3+6*H));
            k3=((int)(1+6*H))%6 + ((1+6*H)-(int)(1+6*H));
-           float f1;f2;f3;
-           f1=V-V*S*three_way_max(0,0,three_way_min(k1,4-k1,1);
-           f2=V-V*S*three_way_max(0,0,three_way_min(k2,4-k2,1); 
-           f3=V-V*S*three_way_max(0,0,three_way_min(k3,4-k3,1);                      
+           float f1,f2,f3;
+           f1=V-V*S*three_way_max(0,0,three_way_min(k1,4-k1,1));
+           f2=V-V*S*three_way_max(0,0,three_way_min(k2,4-k2,1)); 
+           f3=V-V*S*three_way_max(0,0,three_way_min(k3,4-k3,1));                      
            r=f1;
            g=f2;                      
            b=f3;
@@ -142,3 +155,12 @@ void hsv_to_rgb(image im)
         }
     }                      
 }
+    void scale_image(image im, int c, float v){
+    for(int i=0;i<im.h;i++){
+        for(int j=0;j<im.w;j++){
+            im.data[j+i*im.w+c*im.w*im.h]*=v;
+        }
+    }
+}
+
+

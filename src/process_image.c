@@ -10,7 +10,7 @@ float get_pixel(image im, int x, int y, int c)
     if (x >= im.w) x = im.w - 1;
     if (y < 0) y = 0;
     if (y >= im.h) y = im.h - 1;
-    return im.data[x + im.w * y + im.w * im.h * c];
+    return im.data[x + im.w * y + im.w * im.h * c];             
 }
 
 void set_pixel(image im, int x, int y, int c, float v)
@@ -119,5 +119,26 @@ void rgb_to_hsv(image im)
 
 void hsv_to_rgb(image im)
 {
-   
+   for(int i=0;i<im.h;i++){
+       for(int j=0;j<im.w;j++){
+           float H=im.data[j+i*im.w];
+           float S=im.data[j+i*im.w+im.w*im.h];
+           float V=im.data[j+i*im.w+im.w*im.h*2];
+           float r=0,g=0,b=0;
+           float k1,k2,k3;
+           k1=((int)(5+6*H))%6 + ((5+6*H)-(int)(5+6*H));      //here we first calculated integral part then added fractional part
+           k2=((int)(3+6*H))%6 + ((3+6*H)-(int)(3+6*H));
+           k3=((int)(1+6*H))%6 + ((1+6*H)-(int)(1+6*H));
+           float f1;f2;f3;
+           f1=V-V*S*three_way_max(0,0,three_way_min(k1,4-k1,1);
+           f2=V-V*S*three_way_max(0,0,three_way_min(k2,4-k2,1); 
+           f3=V-V*S*three_way_max(0,0,three_way_min(k3,4-k3,1);                      
+           r=f1;
+           g=f2;                      
+           b=f3;
+           im.data[j+i*im.w]=r;
+           im.data[j+i*im.w+im.w*im.h]=g;
+           im.data[j+i*im.w+2*im.w*im.h]=b;
+        }
+    }                      
 }

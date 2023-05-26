@@ -27,7 +27,7 @@ image copy_image(image im)
     for(int i=0;i<im.c;i++){
     for(int j=0;j<im.h;j++){
     for(int k=0;k<im.w;k++){
-    int pval=im.data[k+j*im.w+i*im.h*im.w];
+    float pval=im.data[k+j*im.w+i*im.h*im.w];
     copy.data[k+j*im.w+i*im.h*im.w]=pval;
     return copy;
     }
@@ -70,8 +70,8 @@ void clamp_image(image im)
      for(int k=0;k<im.w;k++){
        if(im.data[i*im.w*im.h+j*im.w+k]>1)
           im.data[i*im.w*im.h+j*im.w+k]=1;
-        else if(im.data[i*im.w*im.h+j*im.w+k]<0)
-           im.data[i*im.w*im.h+j*im.w+k]=0;
+       else if(im.data[i*im.w*im.h+j*im.w+k]<0)
+          im.data[i*im.w*im.h+j*im.w+k]=0;
      }
    }
   }
@@ -91,14 +91,15 @@ float three_way_min(float a, float b, float c)
 
 void rgb_to_hsv(image im)
 {
-   for(int i=0;<im.h;i++){
+   for(int i=0;i<im.h;i++){
        for(int j=0;j<im.w;j++){
-           float r=im.data[j+im.w*i];
-           float g=im.data[j+im.w*i+im.w*im.h];
-           float b=im.data[j+im.w*i+2*im.w*im.h];
-           float V=three_way_max(r,g,b);
-           float m=three_way_min(r,g,b);
-           float C=V-m;
+           float r,g,b,V,m,C;
+           r=im.data[j+im.w*i];
+           g=im.data[j+im.w*i+im.w*im.h];
+           b=im.data[j+im.w*i+2*im.w*im.h];
+           V=three_way_max(r,g,b);
+           m=three_way_min(r,g,b);
+           C=V-m;
            float S;
             if(V==0)
                 S=0;
@@ -134,10 +135,10 @@ void hsv_to_rgb(image im)
 {
    for(int i=0;i<im.h;i++){
        for(int j=0;j<im.w;j++){
-           float H=im.data[j+i*im.w];
-           float S=im.data[j+i*im.w+im.w*im.h];
-           float V=im.data[j+i*im.w+im.w*im.h*2];
-           float r=0,g=0,b=0;
+           float H,S,V;
+           H=im.data[j+i*im.w];
+           S=im.data[j+i*im.w+im.w*im.h];
+           V=im.data[j+i*im.w+im.w*im.h*2];
            float k1,k2,k3;
            k1=((int)(5+6*H))%6 + ((5+6*H)-(int)(5+6*H));      //here we first calculated integral part then added fractional part
            k2=((int)(3+6*H))%6 + ((3+6*H)-(int)(3+6*H));
@@ -145,7 +146,8 @@ void hsv_to_rgb(image im)
            float f1,f2,f3;
            f1=V-V*S*three_way_max(0,0,three_way_min(k1,4-k1,1));
            f2=V-V*S*three_way_max(0,0,three_way_min(k2,4-k2,1)); 
-           f3=V-V*S*three_way_max(0,0,three_way_min(k3,4-k3,1));                      
+           f3=V-V*S*three_way_max(0,0,three_way_min(k3,4-k3,1)); 
+           float r,g,b;
            r=f1;
            g=f2;                      
            b=f3;
